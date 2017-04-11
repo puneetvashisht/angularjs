@@ -14,42 +14,18 @@
             </div>
         
             </div>
-            <div class="row" >
-                <tb-thumbnail ng-repeat="thumbnail in thumbnails | filter: search" title= "{{thumbnail.title}}" summary= "{{thumbnail.summary}}"></tb-thumbnail> 
-            </div>
+                <div class="row" >
+                    <tb-thumbnail ng-repeat="thumbnail in thumbnails | filter: search" title= "{{thumbnail.title}}" >{{thumbnail.summary}}</tb-thumbnail> 
+                </div>
+
         </div>
         
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular.js"></script>
 
-    <script>
-        var app = angular.module('myApp', [])
-
-        app.controller('AppCtrl',function($scope){
-            $scope.thumbnails = [
-                {title: 'AngularJS', summary: 'framework from google..'},
-                {title: 'ReactJS', summary: 'framework from facebook..'},
-                {title: 'emberJS', summary: 'framework from opensource..'},
-                {title: 'CanJS', summary: 'framework from dont know..'}
-            ]
-        })
-
-        app.directive('tbThumbnail', function(){
-            return {
-                templateUrl: 'partial/thumbnail.html',
-                scope: {
-                   title: '@title',
-                   summary: '@summary'     
-                }
-
-               /* link: function(s, e, a){
-                    s.title = a.title
-                    s.summary = a.summary
-                }*/
-
-            }
-        })
-    </script>
+    <script src="js/main.js"></script>
+    <script src="js/controllers/app.js"></script>
+    <script src="js/directives/thumbnail.js"></script>
 </body>
 </html>
