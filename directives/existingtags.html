@@ -1,0 +1,72 @@
+<html>
+<head>
+    <title>Emmet</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <style>
+        .even {
+            background-color: gray
+        }
+        .odd {
+            background-color: green
+        }
+    </style>
+</head>
+<body>
+    <div ng-app="myApp" ng-controller="AppCtrl">
+
+        <input type="text" ng-model="search.x">
+       <input type="text" ng-disabled="search.x">
+
+
+<br/>
+
+       <a href="{{link}}">Google Link</a> 
+       <a ng-href={{link}}>Google Link</a>
+
+
+    <button type="button" class="btn btn-primary" ng-click="toggle()">Primary</button>
+       <ul class="list-group" ng-if="show">
+        <li class="list-group-item">Cras justo odio</li>
+        <li class="list-group-item">Dapibus ac facilisis in</li>
+        <li class="list-group-item">Morbi leo risus</li>
+        <li class="list-group-item">Porta ac consectetur ac</li>
+        <li class="list-group-item">Vestibulum at eros</li>
+    </ul>
+
+
+    <table>
+        <tr ng-repeat="fruit in fruits" ng-class="{even: $even, odd: $odd}">
+            <td>{{$index + 1}}</td>
+            <td>{{$even}}</td>
+            <td>{{fruit}}</td>
+        </tr>
+    </table>
+
+
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular.js"></script>
+
+    <script>
+        var app = angular.module('myApp', [])
+
+        app.controller('AppCtrl', function($scope, $timeout){
+
+            console.log($scope)
+
+            $scope.fruits = ['Apple', 'Mangoes', 'Bananas']
+
+            $scope.show= true;
+            $scope.toggle = function(){
+                $scope.show = !$scope.show
+            }
+            $timeout(function(){
+               console.log('This is fired after 5 seconds') 
+                $scope.link = "http://www.google.com"    
+            }, 10000)
+        })
+
+       
+    </script>
+</body>
+</html>
