@@ -1,0 +1,39 @@
+<html>
+<head>
+    <title>JqueryDemo</title>
+</head>
+<body ng-app="myApp">
+    
+    <div ng-controller="FirstCtrl">
+       <input type="text" ng-model="obj.sharedData"/>
+    </div>
+    <div ng-controller="SecondCtrl">
+       <input type="text" ng-model="obj.sharedData"/>
+    </div>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular.js"></script>
+
+    <script>
+        var app = angular.module('myApp', []);
+        
+        app.factory('CommonDataFactory', function(){
+            return {
+                sharedData : "Some common data"
+            }
+        })
+       
+
+        app.controller('FirstCtrl', function($scope, CommonDataFactory){
+        //    $scope.sharedData = "Some common data"
+              $scope.obj = CommonDataFactory  
+              console.log($scope.obj.sharedData)
+        })  
+        app.controller('SecondCtrl', function($scope, CommonDataFactory){
+        //    $scope.sharedData = "Some common data"
+                $scope.obj = CommonDataFactory  
+        })  
+
+    </script>
+   
+</body>
+</html>

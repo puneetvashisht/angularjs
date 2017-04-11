@@ -1,0 +1,31 @@
+<html>
+<head>
+    <title>JqueryDemo</title>
+</head>
+<body ng-app="myApp">
+    
+    <div ng-controller="AppCtrl">
+        <input type="text" ng-model="text"/>
+        <button ng-click="reverse()">Reverse</button>
+
+    <div>{{reversedText}}</div>
+    </div>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular.js"></script>
+
+    <script>
+        var app = angular.module('myApp', []);
+        
+       
+
+        app.controller('AppCtrl', function($scope){
+            $scope.reverse = function(){
+                console.log($scope.text);
+                $scope.reversedText = $scope.text.split('').reverse().join('')
+            }
+        })  
+
+    </script>
+   
+</body>
+</html>
