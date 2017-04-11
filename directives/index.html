@@ -1,0 +1,27 @@
+<html>
+<head>
+    <title>Emmet</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+</head>
+<body>
+    <div ng-app="myApp">
+        <tb-panel title="AngularJS" summary="framework from google..."></tb-panel>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular.js"></script>
+
+    <script>
+        var app = angular.module('myApp', [])
+
+        app.directive('tbPanel', function(){
+            return {
+                templateUrl: 'partial/panel.html',
+                link: function(scope,element,attrs){
+                    scope.title= attrs.title
+                    scope.summary = attrs.summary
+                }
+            }
+        })
+    </script>
+</body>
+</html>

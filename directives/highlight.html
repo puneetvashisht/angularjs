@@ -1,0 +1,62 @@
+<html>
+<head>
+    <title>Emmet</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+
+    <style>
+        .highlight {
+            background-color: cyan;
+            cursor: pointer;
+        }
+        .box{
+            border: 1px solid red;
+        }
+    </style>
+
+</head>
+<body>
+    <div ng-app="myApp">
+
+    <div>
+        <tb-highlight count="1"></tb-highlight>
+        <tb-highlight count="2"></tb-highlight>
+        <tb-highlight count="3"></tb-highlight>
+    </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular.js"></script>
+
+    <script>
+        var app = angular.module('myApp', [])
+
+       
+
+        app.directive('tbHighlight', function(){
+            return {
+                template: '<div>{{count}}</div>',
+                replace: true,
+                scope: {},
+                link: function(scope,element,attrs){
+                    console.log(scope);
+                    scope.count = attrs.count
+                    console.log(element);
+                    element.addClass('box')
+                    element.bind('click', function(){
+                        ++scope.count;
+                        scope.$apply();
+                    })
+                    element.bind('mouseenter', function(){
+                        console.log('mouse entered..')
+                        element.addClass('highlight')
+                    })
+                    element.bind('mouseleave', function(){
+                        console.log('mouse leave..')
+                        element.removeClass('highlight')
+                    })
+                }
+                
+            }
+        })
+    </script>
+</body>
+</html>
