@@ -1,0 +1,32 @@
+<html>
+<head>
+    <title>JqueryDemo</title>
+</head>
+<body ng-app="myApp">
+    
+    <div ng-controller="AppCtrl">
+        {{name | uppercase}}
+        <br>
+        {{today | date:'medium' }}<br>
+        {{today | date:'short' }}<br>
+        {{today | date:'yy-mm-dd h:MM:s - a' }}<br>
+
+        {{23.34445 | currency:'$'}}
+    </div>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular.js"></script>
+
+    <script>
+        var app = angular.module('myApp', []);
+        
+       
+
+        app.controller('AppCtrl', function($scope){
+            $scope.name = "Joe Root"
+            $scope.today = new Date();
+        })  
+
+    </script>
+   
+</body>
+</html>

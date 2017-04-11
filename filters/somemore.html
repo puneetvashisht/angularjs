@@ -1,0 +1,35 @@
+<html>
+<head>
+    <title>JqueryDemo</title>
+</head>
+<body ng-app="myApp">
+    
+    <div ng-controller="AppCtrl">
+        {{weeks | orderBy}}
+        {{employees | orderBy:'-name' }}
+        
+        {{employees | filter: {role:'IT'} }}
+    </div>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular.js"></script>
+
+    <script>
+        var app = angular.module('myApp', []);
+        
+       
+
+        app.controller('AppCtrl', function($scope){
+            $scope.weeks = ['Mon','Tue', 'Wed', 'Thus'];
+            $scope.today = new Date();
+
+            $scope.employees= [
+                {name: 'Ravi', role:'IT'},
+                {name: 'Priya', role:'Finance'},
+                {name: 'Amit', role:'IT'},
+            ]
+        })  
+
+    </script>
+   
+</body>
+</html>
