@@ -1,0 +1,22 @@
+<html>
+<head>
+    <title>JqueryDemo</title>
+</head>
+<body>
+    <div>We will do some jquery here - any change</div>
+
+    <div>
+        <input type="text" id="welcome">
+        <span id="message"></span>
+    </div>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script>
+        $('#welcome').keyup(function(){
+            console.log($('#welcome').val())
+            $('#message').html($('#welcome').val());
+
+        })
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<html>
+<head>
+    <title>JqueryDemo</title>
+</head>
+<body ng-app="myApp">
+    
+    <div ng-controller="CalcCtrl">
+        <input type="number" ng-model="oper1"/>
+        <input type="number" ng-model="oper2"/>
+        <button ng-click="add()"> + </button>
+        <button ng-click="sub()"> - </button>
+
+        <div>
+            REsult is: {{result}}
+        </div>
+        
+    </div>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular.js"></script>
+
+    <script>
+        var app = angular.module('myApp', []);
+    
+        app.controller('CalcCtrl', function($scope){
+            // $scope.oper1 = 23
+            // $scope.oper2 = 343
+
+            $scope.add = function(){
+                $scope.result = $scope.oper1 + $scope.oper2
+            }
+            $scope.sub = function(){
+                $scope.result = $scope.oper1 - $scope.oper2
+            }
+        })  
+
+    </script>
+   
+</body>
+</html>

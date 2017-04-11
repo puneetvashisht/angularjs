@@ -1,0 +1,41 @@
+<html>
+<head>
+    <title>JqueryDemo</title>
+</head>
+<body ng-app="myApp">
+
+    <input type="text" ng-model="title"> {{title}}
+
+    <div ng-controller="FirstCtrl">
+        {{title}} {{firstName}} {{lastName}}
+         <div ng-controller="SecondCtrl">
+          {{title}}  {{firstName}} {{lastName}}
+         </div>
+        
+    </div>
+   
+    
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular.js"></script>
+
+    <script>
+        var app = angular.module('myApp', []);
+
+        app.run(function($rootScope){
+            console.log($rootScope)
+            $rootScope.title =  "Dr."
+        })
+        var firstCtrlFn = function($scope){
+            console.log($scope)
+            $scope.firstName = "Joe"
+        }
+        app.controller('FirstCtrl', firstCtrlFn)
+
+        app.controller('SecondCtrl', function($scope){
+             console.log($scope)
+            $scope.lastName = "Root"
+        })
+    </script>
+   
+</body>
+</html>

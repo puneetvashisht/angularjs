@@ -1,0 +1,32 @@
+<html>
+<head>
+    <title>JqueryDemo</title>
+</head>
+<body ng-app="myApp">
+    
+    <div ng-controller="AppCtrl">
+        {{x}}
+        <br/>
+        {{person.name}}
+    </div>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular.js"></script>
+
+    <script>
+        var app = angular.module('myApp', []);
+        
+        // app.run(function(){
+        //     console.log('module created')
+        // })  
+
+        app.controller('AppCtrl', function($scope){
+            $scope.x = "string value"
+            $scope.y = 343
+            $scope.z = true
+            $scope.person = {name: 'Joe'}
+        })  
+
+    </script>
+   
+</body>
+</html>
