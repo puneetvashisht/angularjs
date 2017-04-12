@@ -1,0 +1,72 @@
+<html>
+<head>
+    <title>SPA</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+</head>
+<body ng-app="myApp">
+    <div>
+        <ul class="nav nav-tabs">
+        <li role="presentation" class="active"><a href="#!/">Home</a></li>
+        <li role="presentation"><a href="#!/profile">Profile</a></li>
+        </ul>
+        <ng-view></ng-view>
+    </div>
+
+    
+    <script src="node_modules/angular/angular.js"></script>
+    <script src="node_modules/angular-route/angular-route.js"></script>
+    <script>
+        var app = angular.module('myApp', ['ngRoute']);
+
+        app.factory('UserFactory', function(){
+            return {
+                name: '',
+                pwd: ''
+            }
+        })
+
+        app.controller('LoginCtrl', function($scope, $http, $location,UserFactory){
+            
+            $scope.user = UserFactory
+            console.log(UserFactory)
+
+            $scope.authenticate = function(){
+                $http({
+                    url: 'http://localhost:8000/authenticate',
+                    method: 'POST',
+                    data: $scope.user
+                }).then((res) => res.data)
+                .then((data)=> {
+                    console.log(data);  
+                    if(!data.success){
+                        $scope.errormessage = "Invalid User/Password!!"
+                    }
+                    else{
+                        $location.path('/profile')
+                    }  
+                })
+            }
+        })
+
+        app.controller('ProfileCtrl', function($scope, UserFactory){
+             $scope.user = UserFactory
+
+        })
+
+        app.config(function($routeProvider){
+            $routeProvider.when("/", {
+                templateUrl: 'partial/login.html',
+                controller: 'LoginCtrl'
+            }).when("/profile", {
+                templateUrl: 'partial/profile.html',
+                controller: 'ProfileCtrl'
+            }).otherwise({
+                // template: 'ERROR PAGE!!'
+                redirectTo: '/'
+            })
+        })
+
+
+    </script>
+</body>
+</html>

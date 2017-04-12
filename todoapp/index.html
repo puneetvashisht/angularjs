@@ -50,7 +50,15 @@
             }
 
             $scope.removeTodo = function(index){
-                $scope.todos.splice(index,1);
+                // $scope.todos.splice(index,1);
+                $http({
+                url: 'http://localhost:8000/todos',
+                method: 'DELETE',
+                data: {index: index}
+                }).then((res)=>res.data)
+                .then((data)=>{
+                    $scope.todos = data;
+                })
                 console.log('remove todos')
             }
            

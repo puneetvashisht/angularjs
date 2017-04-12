@@ -28,6 +28,12 @@ app.post('/todos', function (req, res) {
   res.json(todos)
 })
 
+app.delete('/todos', function (req, res) {
+  console.log(req.body.index);
+  todos.splice(req.body.index, 1)
+  res.json(todos)
+})
+
 app.listen(8000, function () {
   console.log('Example app listening on port 8000!')
 })
