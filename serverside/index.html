@@ -1,0 +1,97 @@
+<html>
+<head>
+    <title>JqueryDemo</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/css/foundation.css"/>
+</head>
+<body ng-app="myApp">
+    
+    <div ng-controller="AppCtrl">
+
+        <button ng-click="loadData()">Load Data from Server</button>
+        <input type="text" ng-model="search.first_name" placeholder="Search by First Name"/>
+        <input type="text" ng-model="search.email" placeholder="Search by Email"/>
+        <input type="text" ng-model="search.$" placeholder="Search All"/>
+
+        <table>
+            <tr ng-repeat="employee in employees | filter: search | orderBy:'first_name' ">
+                <td>{{employee.first_name}}</td>
+                <td>{{employee.last_name}}</td>
+                <td>{{employee.email}}</td>
+                <td>{{employee.gender}}</td>
+                <td>{{employee.ip_address}}</td>
+            </tr>
+        </table>
+    </div>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular.js"></script>
+
+    <script>
+        var app = angular.module('myApp', []);
+        
+       
+
+        app.controller('AppCtrl', function($scope, $http){
+
+            // $scope.employees // serverside
+
+            $scope.loadData = function(){
+                $http({
+                    url: 'http://localhost:8000/employees',
+                    method: 'GET'
+                }).then((res) => res.data)
+                .then((data)=> {
+                    $scope.employees = data;    
+                })
+
+
+               console.log('test');
+               
+
+                
+
+            }
+
+
+           /* function msgAfterTimeout (msg, who, timeout) {
+                return new Promise((resolve, reject) => {
+                    setTimeout(() => resolve(`${msg} Hello ${who}!`), timeout)
+                })
+            }
+            msgAfterTimeout("", "Foo", 100).then((msg) =>
+                msgAfterTimeout(msg, "Bar", 200)
+            ).then((msg) => {
+                console.log(`done after 300ms:${msg}`)
+            })
+
+
+            function printFn (fn, timeout){
+                console.log(fn)
+                
+                setTimeout(function(){
+                console.log('do some job here.. might take some time');
+                    fn();
+                }, timeout)    
+            }
+
+            printFn(function() { 
+                console.log('Call back function 1')  
+               
+            }, 0);
+             printFn(function() { 
+                    console.log('Call back function 2') 
+                    
+                }, 0);  
+            */
+
+               
+
+           
+            
+           
+        })  
+
+    </script>
+   
+</body>
+</html>

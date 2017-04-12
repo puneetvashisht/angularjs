@@ -1,0 +1,92 @@
+<html>
+<head>
+    <title>JqueryDemo</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/css/foundation.css"/>
+</head>
+<body ng-app="myApp">
+    
+    <div ng-controller="AppCtrl">
+
+        <p>{{errormessage}}</p>
+        <input type="text" ng-model="user.name" placeholder="First Name"/>
+        <input type="password" ng-model="user.pwd"/>
+
+        <button ng-click="submitData()">Sign In</button>
+       
+    </div>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular.js"></script>
+
+    <script>
+        var app = angular.module('myApp', []);
+        
+       
+
+        app.controller('AppCtrl', function($scope, $http){
+
+            // $scope.employees // serverside
+
+            $scope.submitData = function(){
+                console.log($scope.user)
+                $http({
+                    url: 'http://localhost:8000/authenticate',
+                    method: 'POST',
+                    data: $scope.user
+                }).then((res) => res.data)
+                .then((data)=> {
+                    console.log(data);  
+                    if(!data.success){
+                        $scope.errormessage = "Invalid User/Password!!"
+                    }  
+                })
+
+               
+
+                
+
+            }
+
+
+           /* function msgAfterTimeout (msg, who, timeout) {
+                return new Promise((resolve, reject) => {
+                    setTimeout(() => resolve(`${msg} Hello ${who}!`), timeout)
+                })
+            }
+            msgAfterTimeout("", "Foo", 100).then((msg) =>
+                msgAfterTimeout(msg, "Bar", 200)
+            ).then((msg) => {
+                console.log(`done after 300ms:${msg}`)
+            })
+
+
+            function printFn (fn, timeout){
+                console.log(fn)
+                
+                setTimeout(function(){
+                console.log('do some job here.. might take some time');
+                    fn();
+                }, timeout)    
+            }
+
+            printFn(function() { 
+                console.log('Call back function 1')  
+               
+            }, 0);
+             printFn(function() { 
+                    console.log('Call back function 2') 
+                    
+                }, 0);  
+            */
+
+               
+
+           
+            
+           
+        })  
+
+    </script>
+   
+</body>
+</html>

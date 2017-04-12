@@ -1,0 +1,77 @@
+[{
+  "id": 1,
+  "first_name": "Karen",
+  "last_name": "Henry",
+  "email": "khenry0@blogs.com",
+  "gender": "Female",
+  "ip_address": "118.251.10.203"
+}, {
+  "id": 2,
+  "first_name": "Robin",
+  "last_name": "Gilbert",
+  "email": "rgilbert1@hud.gov",
+  "gender": "Female",
+  "ip_address": "105.38.68.238"
+}, {
+  "id": 3,
+  "first_name": "Sandra",
+  "last_name": "Williams",
+  "email": "swilliams2@constantcontact.com",
+  "gender": "Female",
+  "ip_address": "87.129.25.94"
+}, {
+  "id": 4,
+  "first_name": "Clarence",
+  "last_name": "Wilson",
+  "email": "cwilson3@wordpress.com",
+  "gender": "Male",
+  "ip_address": "236.96.162.5"
+}, {
+  "id": 5,
+  "first_name": "Albert",
+  "last_name": "Mitchell",
+  "email": "amitchell4@imgur.com",
+  "gender": "Male",
+  "ip_address": "254.161.77.104"
+}, {
+  "id": 6,
+  "first_name": "Bobby",
+  "last_name": "Hamilton",
+  "email": "bhamilton5@a8.net",
+  "gender": "Male",
+  "ip_address": "90.104.17.207"
+}, {
+  "id": 7,
+  "first_name": "Randy",
+  "last_name": "Romero",
+  "email": "rromero6@deviantart.com",
+  "gender": "Male",
+  "ip_address": "234.25.254.205"
+}, {
+  "id": 8,
+  "first_name": "Billy",
+  "last_name": "Kim",
+  "email": "bkim7@sfgate.com",
+  "gender": "Male",
+  "ip_address": "163.25.192.175"
+}, {
+  "id": 9,
+  "first_name": "Anna",
+  "last_name": "Lewis",
+  "email": "alewis8@apache.org",
+  "gender": "Female",
+  "ip_address": "17.76.182.3"
+}, {
+  "id": 10,
+  "first_name": "Betty",
+  "last_name": "Bell",
+  "email": "bbell9@feedburner.com",
+  "gender": "Female",
+  "ip_address": "169.78.225.255"
+},{"id": 1123,
+  "first_name": "Karen",
+  "last_name": "Henry",
+  "email": "khenry0@blogs.com",
+  "gender": "Female",
+  "ip_address": "118.251.10.203"
+}]

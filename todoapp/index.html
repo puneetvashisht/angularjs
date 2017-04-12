@@ -1,0 +1,62 @@
+<html>
+<head>
+    <title>Todo APP</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/css/foundation.css"/>
+</head>
+<body ng-app="myApp">
+    
+    <div ng-controller="AppCtrl">
+        <input type="text" ng-model="todo"/>
+        <button ng-click="addTodo()">Add Todo</button>
+
+        <hr/>
+
+        <ul>
+            <li ng-repeat="todo in todos">{{todo}} <button ng-click="removeTodo($index)"> X </button></li>
+        </ul>
+
+    </div>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular.js"></script>
+
+    <script>
+        var app = angular.module('myApp', []);
+        
+       
+
+        app.controller('AppCtrl', function($scope, $http){
+            $scope.todos = [];
+
+            $http({
+                url: 'http://localhost:8000/todos',
+                method: 'GET'
+            }).then((res)=>res.data)
+            .then((data)=>{
+                $scope.todos = data;
+            })
+
+            $scope.addTodo = function(){
+               $http({
+                url: 'http://localhost:8000/todos',
+                method: 'POST',
+                data: {todo: $scope.todo}
+                }).then((res)=>res.data)
+                .then((data)=>{
+                    $scope.todos = data;
+                })
+                $scope.todo = ''
+                console.log($scope.todos)
+            }
+
+            $scope.removeTodo = function(index){
+                $scope.todos.splice(index,1);
+                console.log('remove todos')
+            }
+           
+        })  
+
+    </script>
+   
+</body>
+</html>
