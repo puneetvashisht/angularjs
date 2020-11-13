@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular.js" type="text/javascript"></script>
+    <script type="text/javascript">
+
+        var myApp = angular.module('myApp', []);
+
+        myApp.config(function(helloWorldProvider){
+            helloWorldProvider.setName('Ravi')
+
+        })
+
+
+
+        myApp.controller('AppCtrl', function($scope, helloWorldFromFactory, helloWorldFromService, helloWorld){
+
+            $scope.factoryData = helloWorldFromFactory.sayHello();
+            $scope.serviceData = helloWorldFromService.sayHello();
+            $scope.providerData = helloWorld.sayHello();
+          
+        })
+
+        //service style, probably the simplest one
+        myApp.service('helloWorldFromService', function() {
+
+            this.sayHello = function() {
+                return "Hello, Service!"
+            };
+            this.x = 13;
+            this.y='sdlgsd'
+        });
+
+        //factory style, more involved but more sophisticated
+        myApp.factory('helloWorldFromFactory', function() {
+            var obj = {
+                sayHello: function() {
+                    return "Hello, Factory!"
+                },
+                x: 12,
+                y: 'slkdsg'
+            };
+
+            return obj;
+        });
+
+        //provider style, full blown, configurable version
+        myApp.provider('helloWorld', function() {
+            // In the provider function, you cannot inject any
+            // service or factory. This can only be done at the
+            // "$get" method.
+
+            this.name = 'Default';
+
+            this.$get = function() {
+                var name = this.name;
+                return {
+                    sayHello: function() {
+                        return "Hello, " + name + "!"
+                    }
+                }
+            };
+
+            this.setName = function(name) {
+                this.name = name;
+            };
+        });
+
+
+       
+
+
+
+
+
+        //hey, we can configure a provider!
+       /* myApp.config(function(helloWorldProvider){
+            helloWorldProvider.setName('Puneet');
+        });*/
+
+
+
+
+        /*function MyCtrl($scope,helloWorld, helloWorldFromFactory, helloWorldFromService) {
+
+//            helloWorld.setName('Abcd');
+
+            $scope.hellos = [
+                helloWorld.sayHello(),
+                helloWorldFromFactory.sayHello(),
+                helloWorldFromService.sayHello()];
+
+
+
+
+            console.log($scope.hellos);
+        }*/
+
+
+        function outer(){
+            console.log('Outer called');
+            var x = 2;
+            var inner = function(){
+                console.log('Inner called');
+                console.log(x + 2);
+                x = 2;
+
+            }
+            return inner;
+        }
+
+
+
+    </script>
+</head>
+<body ng-app="myApp">
+<div ng-controller="AppCtrl">
+   {{factoryData}}
+    {{serviceData}}
+    <br>
+    {{providerData}}
+
+</div>
+
+</body>
+</html>

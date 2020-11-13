@@ -19,46 +19,63 @@
     </div>
     
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular.js"></script>
+    <script src="node_modules/angular-local-storage/dist/angular-local-storage.js"></script>
 
     <script>
-        var app = angular.module('myApp', []);
+        var app = angular.module('myApp', ['LocalStorageModule']);
         
-       
+       app.config(function (localStorageServiceProvider) {
+        localStorageServiceProvider
+            .setPrefix('tb');
+        });
 
-        app.controller('AppCtrl', function($scope, $http){
-            $scope.todos = [];
+        app.controller('AppCtrl', function($scope, $http, localStorageService,$rootScope){
+            var todos = localStorageService.get('todos')
+            $scope.todos = (todos && todos.split('::')) || [];
 
-            $http({
-                url: 'http://localhost:8000/todos',
-                method: 'GET'
-            }).then((res)=>res.data)
-            .then((data)=>{
-                $scope.todos = data;
+
+            $rootScope.$watch(function(){
+                console.log('digest processing')
             })
 
+            /*$scope.$watch('todo', function () {
+                        console.log('change detected... in todo')
+            });
+            */
+
+            $scope.$watch('todos', function (newVal, oldVal) {
+                console.log(oldVal);
+                console.log(newVal);
+                console.log('change detected')
+                localStorageService.set('todos', newVal.join('::'));
+                
+            },true);
+            
             $scope.addTodo = function(){
-               $http({
+               /*$http({
                 url: 'http://localhost:8000/todos',
                 method: 'POST',
                 data: {todo: $scope.todo}
                 }).then((res)=>res.data)
                 .then((data)=>{
                     $scope.todos = data;
-                })
+                })*/
+                $scope.todos.push($scope.todo)
+                
                 $scope.todo = ''
                 console.log($scope.todos)
             }
 
             $scope.removeTodo = function(index){
-                // $scope.todos.splice(index,1);
-                $http({
+                $scope.todos.splice(index,1);
+                /*$http({
                 url: 'http://localhost:8000/todos',
                 method: 'DELETE',
                 data: {index: index}
                 }).then((res)=>res.data)
                 .then((data)=>{
                     $scope.todos = data;
-                })
+                })*/
                 console.log('remove todos')
             }
            

@@ -21,12 +21,14 @@
         app.factory('UserFactory', function(){
             return {
                 name: '',
-                pwd: ''
+                pwd: '',
+                authenticated: false
             }
         })
 
-        app.controller('LoginCtrl', function($scope, $http, $location,UserFactory){
+        app.controller('LoginCtrl', function($scope, $http, $location,UserFactory,$route){
             
+            console.log($route)
             $scope.user = UserFactory
             console.log(UserFactory)
 
@@ -39,9 +41,11 @@
                 .then((data)=> {
                     console.log(data);  
                     if(!data.success){
+                        UserFactory.authenticated = false;
                         $scope.errormessage = "Invalid User/Password!!"
                     }
                     else{
+                        UserFactory.authenticated = true;
                         $location.path('/profile')
                     }  
                 })
@@ -59,7 +63,23 @@
                 controller: 'LoginCtrl'
             }).when("/profile", {
                 templateUrl: 'partial/profile.html',
-                controller: 'ProfileCtrl'
+                controller: 'ProfileCtrl',
+                resolve: {
+                                myApp: function($q, $timeout, UserFactory) {
+                                    var defer = $q.defer();
+                                    if(UserFactory.authenticated){
+                                        defer.resolve();
+                                    }
+                                    else{
+                                        defer.reject();
+                                    }
+                                    /*$timeout(function() {
+                                     
+                                   }, 10000);*/
+                                    return defer.promise;
+                                }
+
+              }
             }).otherwise({
                 // template: 'ERROR PAGE!!'
                 redirectTo: '/'
